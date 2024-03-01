@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Rock, Paper & Scissors</title>
+</head>
+<body>
+  <script>
+    // Your JavaScript goes here!
+    
+    function getComputerChoice(){
+
+      let genNumber = Math.floor(Math.random()*3)+1;
+
+      if (genNumber == 1){
+        return 'rock';
+      } else if (genNumber == 2){
+        return 'scissors';
+      } else if (genNumber == 3){
+        return 'paper';
+      } else {
+        return 'error in the generator';
+      }
+    }
+
+    function playRound(playerSelection, computerSelection){
+
+      if (playerSelection == 'rock'){
+        if (computerSelection == 'scissors'){
+          alert("You Win! Rock beats Scissors");
+        } else if (computerSelection == 'paper') {
+          alert("You Lose! Paper beats Rock");
+        } else {
+          alert("You tie! Both guessed Rock");
+        }
+      }
+      else if (playerSelection == 'scissors'){
+        if (computerSelection == 'paper'){
+          alert("You Win! Scissors beats Paper");
+        } else if (computerSelection == 'rock') {
+          alert("You Lose! Rock beats Scissors");
+        } else {
+          alert("You tie! Both guessed Scissors");
+        }
+      }
+      else if (playerSelection == 'paper'){
+        if (computerSelection == 'rock'){
+          alert("You Win! Paper beats Rock");
+        } else if (computerSelection == 'scissors'){
+          alert("You Lose! Scissors beat Paper");
+        } else {
+          alert("You both tie! Both guessed Paper")
+        }
+      }
+      else {
+        alert("You have typed a wrong input");
+      }
+
+    }
+    
+    for (let i= 1; i<=5; i++){
+
+      let playerSelection = prompt("Player's Guess: rock, scissors or paper");
+      let computerSelection = getComputerChoice();
+
+      playRound(playerSelection,computerSelection);
+    }
+
+  </script>
+</body>
+</html>
