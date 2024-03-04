@@ -28,8 +28,10 @@
       if (playerSelection == 'rock'){
         if (computerSelection == 'scissors'){
           alert("You Win! Rock beats Scissors");
+          countWin = countWin+1;
         } else if (computerSelection == 'paper') {
           alert("You Lose! Paper beats Rock");
+          countLose = countLose+1;
         } else {
           alert("You tie! Both guessed Rock");
         }
@@ -37,8 +39,10 @@
       else if (playerSelection == 'scissors'){
         if (computerSelection == 'paper'){
           alert("You Win! Scissors beats Paper");
+          countWin = countWin+1;
         } else if (computerSelection == 'rock') {
           alert("You Lose! Rock beats Scissors");
+          countLose = countLose+1;
         } else {
           alert("You tie! Both guessed Scissors");
         }
@@ -46,8 +50,10 @@
       else if (playerSelection == 'paper'){
         if (computerSelection == 'rock'){
           alert("You Win! Paper beats Rock");
+          countWin = countWin+1;
         } else if (computerSelection == 'scissors'){
           alert("You Lose! Scissors beat Paper");
+          countLose = countLose+1;
         } else {
           alert("You both tie! Both guessed Paper")
         }
@@ -58,12 +64,23 @@
 
     }
     
+    let countWin = 0, countLose = 0;
+
     for (let i= 1; i<=5; i++){
 
       let playerSelection = prompt("Player's Guess: rock, scissors or paper");
+      playerSelection = playerSelection.toLowerCase();
       let computerSelection = getComputerChoice();
 
       playRound(playerSelection,computerSelection);
+    }
+
+    if ( countWin > countLose){
+      alert("You have Won the game! "+countWin+" against "+countLose);
+    } else if ( countWin < countLose ){
+      alert("You have Lost the game! "+countWin+" against "+countLose);
+    } else {
+      alert("You have Tied the game! "+countWin+" against "+countLose);
     }
 
   </script>
