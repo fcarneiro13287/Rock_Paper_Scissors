@@ -5,9 +5,19 @@
   <title>Rock, Paper & Scissors</title>
 </head>
 <body>
+
+  <h2>Play the Game Rock-Paper-Scissors (The best out of 5)</h2>
+  <div id="container">
+
+  </div>
+
   <script>
+    
     // Your JavaScript goes here!
     
+
+    //// Functions Declaration  ///////
+
     function getComputerChoice(){
 
       let genNumber = Math.floor(Math.random()*3)+1;
@@ -25,63 +35,144 @@
 
     function playRound(playerSelection, computerSelection){
 
+
+      const Disp = document.createElement('div');
+
+      
       if (playerSelection == 'rock'){
         if (computerSelection == 'scissors'){
-          alert("You Win! Rock beats Scissors");
+          Disp.textContent = "You Win! Rock beats Scissors";
           countWin = countWin+1;
         } else if (computerSelection == 'paper') {
-          alert("You Lose! Paper beats Rock");
+          Disp.textContent = "You Lose! Paper beats Rock";
           countLose = countLose+1;
         } else {
-          alert("You tie! Both guessed Rock");
+          Disp.textContent = "You tie! Both guessed Rock";
         }
       }
       else if (playerSelection == 'scissors'){
         if (computerSelection == 'paper'){
-          alert("You Win! Scissors beats Paper");
+          Disp.textContent = "You Win! Scissors beats Paper";
           countWin = countWin+1;
         } else if (computerSelection == 'rock') {
-          alert("You Lose! Rock beats Scissors");
+          Disp.textContent = "You Lose! Rock beats Scissors";
           countLose = countLose+1;
         } else {
-          alert("You tie! Both guessed Scissors");
+          Disp.textContent = "You tie! Both guessed Scissors";
         }
       }
       else if (playerSelection == 'paper'){
         if (computerSelection == 'rock'){
-          alert("You Win! Paper beats Rock");
+          Disp.textContent = "You Win! Paper beats Rock";
           countWin = countWin+1;
         } else if (computerSelection == 'scissors'){
-          alert("You Lose! Scissors beat Paper");
+          Disp.textContent = "You Lose! Scissors beat Paper";
           countLose = countLose+1;
         } else {
-          alert("You both tie! Both guessed Paper")
+          Disp.textContent ="You both tie! Both guessed Paper";
         }
       }
       else {
         alert("You have typed a wrong input");
       }
 
+      container.appendChild(Disp);
+      Disp.focus();
+
+    }
+
+    function accessWinner(){
+
+    const Disp = document.createElement('div');
+
+    if ( countWin == 5  ){
+      Disp.textContent = "You have Won the game! Best out of 5. ";
+      countWin = 0; 
+      countLose = 0;
+
+      // Refresh the page after a delay of 2 seconds
+      setTimeout(function(){
+          location.reload();
+      }, 3000);
+
+
+    } else if ( countLose == 5 ){
+      Disp.textContent = "You have Lost the game! Best out of 5. ";
+      countWin = 0; 
+      countLose = 0;
+
+      // Refresh the page after a delay of 2 seconds
+      setTimeout(function(){
+          location.reload();
+      }, 3000);
+
+ 
+
+    } else {
+      Disp.textContent = "You will play another round. Score is Player: "+countWin+" and Computer:"+countLose;
+    }
+
+    container.appendChild(Disp);
+
+
+
     }
     
+    ///////// Main Program  /////////
+
     let countWin = 0, countLose = 0;
 
-    for (let i= 1; i<=5; i++){
+    
+    //Creation of the Buttons on the Webpage
+    const container = document.querySelector('#container')
 
-      let playerSelection = prompt("Player's Guess: rock, scissors or paper");
-      playerSelection = playerSelection.toLowerCase();
-      let computerSelection = getComputerChoice();
+    const rockBtn = document.createElement('button')
+    rockBtn.textContent = 'Rock'
+    const scissorsBtn = document.createElement('button')
+    scissorsBtn.textContent = 'Scissors'
+    const paperBtn = document.createElement('button')
+    paperBtn.textContent = 'Paper'
 
-      playRound(playerSelection,computerSelection);
-    }
+    container.appendChild(rockBtn);
+    container.appendChild(scissorsBtn);   
+    container.appendChild(paperBtn);
 
-    if ( countWin > countLose){
-      alert("You have Won the game! "+countWin+" against "+countLose);
-    } else if ( countWin < countLose ){
-      alert("You have Lost the game! "+countWin+" against "+countLose);
-    } else {
-      alert("You have Tied the game! "+countWin+" against "+countLose);
-    }
+    //let playerSelection = prompt("Player's Guess: rock, scissors or paper");
+    //playerSelection = playerSelection.toLowerCase();
+    let computerSelection, playerSelection;
+
+
+
+      rockBtn.addEventListener("click", function(e){
+        playerSelection = 'rock';
+       computerSelection = getComputerChoice();
+
+        playRound(playerSelection,computerSelection);
+
+        accessWinner();
+
+      });
+
+      scissorsBtn.addEventListener("click", function(e){
+        playerSelection = 'scissors';
+        computerSelection = getComputerChoice();
+
+        playRound(playerSelection,computerSelection);
+
+        accessWinner();
+
+      });
+
+      paperBtn.addEventListener("click", function(e){
+        playerSelection = 'paper';
+        computerSelection = getComputerChoice();
+
+        playRound(playerSelection,computerSelection);
+
+        accessWinner();
+
+      });
+
 
   </script>
 </body>
